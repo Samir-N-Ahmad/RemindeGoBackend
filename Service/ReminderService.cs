@@ -1,36 +1,48 @@
 
 
 
+using AutoMapper;
+using ErrorOr;
+using ReminderApp.Common.Contracts;
+using ReminderApp.DataAccess.Entity;
+using ReminderApp.DataAccess.Repository;
+
 namespace ReminderApp.Service;
 
-public class ReminderService : IReminderService
+public class ReminderService(IReminderRepository reminderRepository, IMapper mapper) : IReminderService
 {
-    public Task ChangeReminderDate()
+    private readonly IReminderRepository _reminderRepository = reminderRepository;
+    private readonly IMapper _mapper = mapper;
+    public Task<ErrorOr<bool>> ChangeReminderLocation()
     {
         throw new NotImplementedException();
     }
 
-    public Task ChangeReminderLocation()
+    public async Task<ErrorOr<CreateReminderResult>> CreateReminder(CreateReminderRequest request)
+    {
+        try
+        {
+
+            var reminder = await _reminderRepository.AddReminder(_mapper.Map<Reminder>(request));
+            return _mapper.Map<CreateReminderResult>(request);
+        }
+        catch (Exception e)
+        {
+            return Error.Failure(e.Message);
+        }
+    }
+
+    public Task<ErrorOr<bool>> DeleteReminder()
     {
         throw new NotImplementedException();
     }
 
-    public Task CreateReminder()
+    public Task<ErrorOr<bool>> DiableReminder()
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteReminder()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DiableReminder()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task EnableReminder()
+    public Task<ErrorOr<bool>> EnableReminder()
     {
         throw new NotImplementedException();
     }

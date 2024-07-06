@@ -1,26 +1,47 @@
 
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using ReminderApp.DataAccess.types;
 
 namespace ReminderApp.DataAccess.Entity;
 
-public class Reminder
+public sealed class Reminder
 {
 
-    [Required]
-    public required string Id { get; init; }
+    private Reminder()
+    {
+
+    }
+
+
+    public static Reminder New(string title, DateTime? date, string description, Location location, int status = ((int)ReminderStatus.InActive))
+    {
+        return new Reminder()
+        {
+
+            Id = Guid.NewGuid(),
+            Title = title,
+            Date = date ?? DateTime.Now,
+            Description = description,
+            Status = status,
+            ReminderLocation = location
+        };
+    }
+
 
     [Required]
-    public required string Title { get; init; }
-    public string? Description { get; init; }
-    public required DateTime Date { get; init; }
+    public Guid Id { get; private set; }
+
+    [Required]
+    public string Title { get; private set; }
+    public string? Description { get; private set; }
+    public DateTime Date { get; private set; }
 
     [EnumDataType(typeof(ReminderStatus))]
     [DefaultValue(ReminderStatus.InActive)]
-    public int Status { get; init; }
+    public int Status { get; private set; }
 
     [Required]
-    public required Location ReminderLocation { get; init; }
+    public Location ReminderLocation { get; private set; }
 }
