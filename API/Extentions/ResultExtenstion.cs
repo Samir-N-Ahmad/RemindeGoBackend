@@ -1,6 +1,8 @@
 
 
 
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
 namespace ReminderApp.API.Extentions;
 public static class ResultExtenstions
 {
@@ -46,5 +48,10 @@ public static class ResultExtenstions
 
             return Results.Ok(result.Value);
         }
+    }
+
+    public static IResult HandleValidationError(this ModelStateDictionary state)
+    {
+        return Results.BadRequest(state.Values.SelectMany(value => value.Errors.Select(error => error.ErrorMessage)).Aggregate((acc, value) => acc + $", \n ${value}"));
     }
 }

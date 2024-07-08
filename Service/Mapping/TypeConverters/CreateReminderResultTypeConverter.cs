@@ -11,7 +11,7 @@ namespace ReminderApp.Service.Mapping.TypeConverters;
 public class CreateReminderResultTypeConverter : ITypeConverter<Reminder, CreateReminderResult>
 {
 
-
+    public CreateReminderResultTypeConverter() { }
     CreateReminderResult ITypeConverter<Reminder, CreateReminderResult>.Convert(Reminder source, CreateReminderResult destination, ResolutionContext context)
     {
         return new CreateReminderResult(source.Title,

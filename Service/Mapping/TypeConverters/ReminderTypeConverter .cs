@@ -10,6 +10,7 @@ namespace ReminderApp.Service.Mapping.TypeConverters;
 
 public class ReminderTypeConverter : ITypeConverter<CreateReminderRequest, Reminder>
 {
+    public ReminderTypeConverter() { }
     public Reminder Convert(CreateReminderRequest source, Reminder destination, ResolutionContext context)
     {
         var location = new Location() { Lang = source.Lang.ToString(), Lat = source.Lat.ToString() };

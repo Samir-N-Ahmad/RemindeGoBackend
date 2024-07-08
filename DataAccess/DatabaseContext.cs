@@ -26,10 +26,9 @@ public class DatabaseContext(IOptions<DatabaseConfigs> dbSettings) : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Reminder>().HasOne<Location>();
-        modelBuilder.Entity<Reminder>().HasOne<Location>();
 
     }
 
-    public DbSet<Reminder> Reminders;
-    public DbSet<Location> Locations;
+    public DbSet<Reminder> Reminders { get; set; }
+    public DbSet<Location> Locations { get; set; }
 }

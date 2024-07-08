@@ -22,9 +22,9 @@ public class ReminderService(IReminderRepository reminderRepository, IMapper map
     {
         try
         {
-
-            var reminder = await _reminderRepository.AddReminder(_mapper.Map<Reminder>(request));
-            return _mapper.Map<CreateReminderResult>(request);
+            Reminder reminder = _mapper.Map<Reminder>(request);
+            await _reminderRepository.AddReminder(reminder);
+            return _mapper.Map<CreateReminderResult>(reminder);
         }
         catch (Exception e)
         {

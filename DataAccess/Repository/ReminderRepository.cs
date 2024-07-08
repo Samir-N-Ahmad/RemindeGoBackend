@@ -13,17 +13,22 @@ public class ReminderReository(DatabaseContext databaseContext) : IReminderRepos
     {
         try
         {
-            await _databaseContext.Database.BeginTransactionAsync();
-            var reminder = await _databaseContext.AddAsync(reminder);
-            await _databaseContext.FindAsync(obj => obj.)
-            await _databaseContext.Database.CommitTransactionAsync();
+            var addedReminder = await _databaseContext.Reminders.AddAsync(reminder);
+            _databaseContext.SaveChanges();
+
+            return reminder;
 
         }
-        catch (DbException e)
+        catch (DbException)
         {
-
-            await _databaseContext.Database.RollbackTransactionAsync();
+            throw new Exception("Database error");
         }
+        catch (Exception)
+        {
+            throw new Exception("Unknown error");
+
+        }
+
 
     }
 
