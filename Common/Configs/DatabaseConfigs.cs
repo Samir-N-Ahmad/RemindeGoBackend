@@ -1,9 +1,8 @@
 
 
 
-using System.Security.Policy;
 
-namespace ReminderApp.Common;
+namespace ReminderApp.Common.Configs;
 public record DatabaseConfigs
 {
     public const string SectionTitle = "DatabaseSettings";
