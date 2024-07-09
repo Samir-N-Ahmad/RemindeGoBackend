@@ -1,8 +1,7 @@
 
 
 
-using Microsoft.EntityFrameworkCore.Metadata;
-using ReminderApp.Common;
+using ReminderApp.Common.Configs;
 using ReminderApp.DataAccess;
 using ReminderApp.DataAccess.Repository;
 using ReminderApp.Service;
