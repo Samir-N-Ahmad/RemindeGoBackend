@@ -7,7 +7,7 @@ using ReminderApp.DataAccess.types;
 
 namespace ReminderApp.DataAccess.Entity;
 
-public class AppUser : IdentityUser<Guid>
+public class AppUser : IdentityUser
 {
     [Required()]
     public required string FirstName { get; set; }
