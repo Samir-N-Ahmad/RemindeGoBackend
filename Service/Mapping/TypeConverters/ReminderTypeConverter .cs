@@ -13,7 +13,6 @@ public class ReminderTypeConverter : ITypeConverter<CreateReminderRequest, Remin
     public ReminderTypeConverter() { }
     public Reminder Convert(CreateReminderRequest source, Reminder destination, ResolutionContext context)
     {
-        var location = new Location() { Lang = source.Lang.ToString(), Lat = source.Lat.ToString() };
-        return Reminder.New(title: source.Title, location: location, description: source.Description, date: DateTime.Now);
+        return Reminder.New(profileId: Guid.Parse(source.profileId), title: source.Title, description: source.Description, date: DateTime.Now);
     }
 }

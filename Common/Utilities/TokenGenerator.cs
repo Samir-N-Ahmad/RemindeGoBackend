@@ -43,7 +43,7 @@ public class TokenGenerator : ITokenGenerator
         SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor()
         {
             Issuer = _jwtSettings.ValidIssuer,
-            Audience = _jwtSettings.ValidAudeinces,
+            Audience = _jwtSettings.ValidAudeinces.First(),
             Subject = new ClaimsIdentity(claims),
             SigningCredentials = credentials,
 

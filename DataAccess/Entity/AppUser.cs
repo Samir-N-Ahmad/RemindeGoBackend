@@ -7,8 +7,10 @@ using ReminderApp.DataAccess.types;
 
 namespace ReminderApp.DataAccess.Entity;
 
-public class AppUser : IdentityUser
+public class AppUser : IdentityUser<Guid>
 {
+    public override Guid Id { get => base.Id; set => base.Id = value; }
+
     [Required()]
     public required string FirstName { get; set; }
     [Required()]
@@ -17,4 +19,5 @@ public class AppUser : IdentityUser
     [EnumDataType(typeof(UserRole))]
     [Required()]
     public required int Role { get; set; }
+    public UserProfile UserProfile { get; set; }
 }

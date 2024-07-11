@@ -15,7 +15,7 @@ public sealed class Reminder
     }
 
 
-    public static Reminder New(string title, DateTime? date, string description, Location location, int status = ((int)ReminderStatus.InActive))
+    public static Reminder New(string title, DateTime? date, string description, Guid profileId, int status = ((int)ReminderStatus.InActive))
     {
         return new Reminder()
         {
@@ -25,7 +25,7 @@ public sealed class Reminder
             Date = date ?? DateTime.Now,
             Description = description,
             Status = status,
-            ReminderLocation = location
+            ReminderUserProfileId = profileId
         };
     }
 
@@ -43,5 +43,9 @@ public sealed class Reminder
     public int Status { get; private set; }
 
     [Required]
-    public Location ReminderLocation { get; private set; }
+    public Guid ReminderUserProfileId { get; set; }
+
+    // 
+    public UserProfile ReminderUserProfile { get; set; }
+    public ICollection<Location> ReminderLocations { get; set; }
 }

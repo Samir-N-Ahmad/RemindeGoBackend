@@ -38,7 +38,7 @@ public class RemindersController(IReminderService reminderService) : ControllerB
     {
         if (!ModelState.IsValid)
         {
-            return ModelState.HandleValidationError();
+            return Results.BadRequest(ModelState.ValidationState);
         }
         try
         {

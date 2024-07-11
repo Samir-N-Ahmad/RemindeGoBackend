@@ -31,7 +31,7 @@ public static class DatabaseSerializer
                     await dbContext.Database.OpenConnectionAsync();
 
                     await dbContext.Database.BeginTransactionAsync();
-                    await dbContext.AppUsers.AddAsync(new AppUser()
+                    await dbContext.AppUsers.AddAsync(new AppUser
                     {
                         FirstName = "Admin",
                         LastName = "Admin",

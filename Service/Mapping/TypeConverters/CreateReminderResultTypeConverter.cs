@@ -14,10 +14,17 @@ public class CreateReminderResultTypeConverter : ITypeConverter<Reminder, Create
     public CreateReminderResultTypeConverter() { }
     CreateReminderResult ITypeConverter<Reminder, CreateReminderResult>.Convert(Reminder source, CreateReminderResult destination, ResolutionContext context)
     {
+
+
+        double? lat =
+         source.ReminderLocations.Count > 0 ? double.Parse(source.ReminderLocations.First().Lat) : null;
+        double? lang =
+       source.ReminderLocations.Count > 0 ? double.Parse(source.ReminderLocations.First().Lang) : null;
+
         return new CreateReminderResult(source.Title,
 
-           double.Parse(source.ReminderLocation.Lang),
-             double.Parse(source.ReminderLocation.Lat),
+          lang,
+             lat,
              source.Description);
     }
 }
