@@ -31,14 +31,20 @@ public static class DatabaseSerializer
                     await dbContext.Database.OpenConnectionAsync();
 
                     await dbContext.Database.BeginTransactionAsync();
-                    await dbContext.AppUsers.AddAsync(new AppUser
+
+                    var admin = new AppUser
                     {
                         FirstName = "Admin",
                         LastName = "Admin",
                         Email = "Admin@ReminderApp.ai",
                         Role = (int)UserRole.Admin,
                         PasswordHash = ""
-                    });
+                    };
+                    // add an admin user
+                    await dbContext.AppUsers.AddAsync(admin);
+
+                    // create profile for the admin user
+                    await dbContext.UserProfile.AddAsync(UserProfile.New(admin.Id, null, null, null));
 
                     await dbContext.SaveChangesAsync();
                     await dbContext.Database.CommitTransactionAsync();
