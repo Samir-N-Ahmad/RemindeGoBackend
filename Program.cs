@@ -27,7 +27,7 @@ internal class Program
         builder.Services.AddDbContext<DatabaseContext>();
 
 
-        builder.Services.AddIdentity<AppUser, IdentityRole>(
+        builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(
             options =>
         {
             options.Password = new()
@@ -47,7 +47,7 @@ internal class Program
         })
         .AddEntityFrameworkStores<DatabaseContext>()
         .AddDefaultTokenProviders()
-        .AddRoles<IdentityRole>()
+        .AddRoles<IdentityRole<Guid>>()
         .AddSignInManager();
 
         var jwtSettings = builder.Configuration.GetSection(JWtSettings.SectionTitle);
