@@ -20,11 +20,9 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-<<<<<<< HEAD
-=======
+
   <ItemGroup>
-    <ProjectReference Include="..\RemindeGoBackend\ReminderApp.csproj" />
+    <ProjectReference Include="..\Backend\Backend.csproj" />
   </ItemGroup>
 
->>>>>>> 7861e2e (Add Tests project)
 </Project>

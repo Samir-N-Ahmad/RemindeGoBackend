@@ -5,10 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C#: ReminderApp Debug",
+            "name": "C#: Debug",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/ReminderApp.csproj"
+            "projectPath": "${workspaceFolder}/Backend.csproj"
+        },
+        {
+            "name": "C#: Remindego Debug",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Backend/Backend.csproj"
+        },
+        {
+            "name": "C#: Remindego Test Debug",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Tests/Tests.csproj"
         },
         {
             "name": ".NET Core Attach",
