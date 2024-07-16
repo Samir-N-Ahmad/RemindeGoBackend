@@ -1,2 +1,10 @@
+<<<<<<< HEAD
 obj/
 bin/
+=======
+RemindeGoBackend/obj/
+RemindeGoBackend/bin/
+
+Tests/obj/
+Tests/bin/
+>>>>>>> 7861e2e (Add Tests project)
