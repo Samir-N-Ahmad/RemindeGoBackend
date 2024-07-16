@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReminderApp", "RemindeGoBackend\ReminderApp.csproj", "{7CE10D33-9113-4330-A2BF-F4D9E28735C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.csproj", "{7CE10D33-9113-4330-A2BF-F4D9E28735C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{900BC244-3696-4094-BC20-8A40C4FF3E04}"
 EndProject
