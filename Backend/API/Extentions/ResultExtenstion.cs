@@ -14,6 +14,7 @@ public static class ResultExtenstions
         if (result.IsError)
         {
             var error = result.Errors.First();
+            var errorText = $"${error.Description}, ${error.Code}";
             ///TODO: Hanlde multiple errors
             switch (error.Type)
             {
@@ -23,11 +24,11 @@ public static class ResultExtenstions
                     }
                 case ErrorOr.ErrorType.Conflict:
                     {
-                        return Results.Conflict(error.Description);
+                        return Results.Conflict(errorText);
                     }
                 case ErrorOr.ErrorType.NotFound:
                     {
-                        return Results.NotFound(error.Description);
+                        return Results.NotFound(errorText);
                     }
                 case ErrorOr.ErrorType.Forbidden:
                     {
@@ -35,11 +36,11 @@ public static class ResultExtenstions
                     }
                 case ErrorOr.ErrorType.Validation:
                     {
-                        return Results.BadRequest(error.Description);
+                        return Results.BadRequest(errorText);
                     }
                 default:
                     {
-                        return Results.BadRequest(error.Description);
+                        return Results.BadRequest(errorText);
                     }
             }
         }

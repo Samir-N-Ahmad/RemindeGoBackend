@@ -48,37 +48,6 @@ public class MailService(IMailjetClient mailjetClient) : IMailService
         {
             return Error.Failure("Unkown error, Could not send email");
         }
-        // await _mailjetClient.PostAsync(request)
 
-        // MailjetClient client = new(
-        //    "f302f2e1a1d2ad3166fbed14d2fd4995",
-        //    "b7b3a6ed0e6150fa58ee792034a385bf");
-
-
-        //     MailjetRequest request = new()
-        //     {
-        //         Resource = Send.Resource
-        //     };
-
-        //     var email = new TransactionalEmailBuilder()
-        //            .WithFrom(new SendContact(sender))
-        //            .WithSubject(subject)
-        //            .WithHtmlPart(content)
-        //            .WithTo(new SendContact(reciever))
-        //            .Build();
-        //     try
-        //     {
-
-        //         var response = await client.SendTransactionalEmailAsync(email);
-        //         if (response.Messages.Length >= 1)
-        //         {
-        //             Console.WriteLine(response.Messages.Aggregate((acc, message) => new MessageResult { Status = acc.Status + message.Status }));
-        //         }
-        //     }
-        //     catch
-        //     {
-
-        //     }
-        // }
     }
 }

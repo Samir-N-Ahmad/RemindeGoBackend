@@ -14,6 +14,7 @@ using Backend.Service;
 using Backend.Service.Mapping;
 using Mailjet.Client;
 using Backend.Service.MailService;
+using Backend.Common.Utilities;
 
 
 internal class Program
@@ -39,7 +40,6 @@ internal class Program
         });
 
 
-        builder.Services.AddScoped<IMailService, IMailService>();
         builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(
             options =>
         {
@@ -55,8 +55,12 @@ internal class Program
             {
                 RequireConfirmedEmail = false,
                 RequireConfirmedAccount = false,
-                RequireConfirmedPhoneNumber = false
+                RequireConfirmedPhoneNumber = false,
+
             };
+
+            options.User.RequireUniqueEmail = true;
+            options.Lockout.MaxFailedAccessAttempts = 10;
         })
         .AddEntityFrameworkStores<DatabaseContext>()
         .AddDefaultTokenProviders()
@@ -71,6 +75,7 @@ internal class Program
                   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                   options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
               })
               .AddJwtBearer(options =>
         {
@@ -88,6 +93,7 @@ internal class Program
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SigningKeys))
 
             };
+
         });
 
         builder.Services.AddAuthorizationBuilder();
@@ -95,6 +101,10 @@ internal class Program
 
         builder.Services.AddScoped<IReminderService, ReminderService>();
         builder.Services.AddScoped<IReminderRepository, ReminderReository>();
+        builder.Services.AddTransient<ITokenGenerator, TokenGenerator>();
+        builder.Services.AddTransient<IAuthService, AuthService>();
+        builder.Services.AddTransient<IMailService, MailService>();
+
         builder.Services.AddControllers();
 
         builder.Services.AddProblemDetails();
