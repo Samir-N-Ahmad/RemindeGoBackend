@@ -12,9 +12,10 @@ using Backend.DataAccess.Entity;
 using Backend.DataAccess.Repository;
 using Backend.Service;
 using Backend.Service.Mapping;
+using Mailjet.Client;
+using Backend.Service.MailService;
 
 
-namespace RemindeGo;
 internal class Program
 {
     static async Task Main(string[] args)
@@ -28,7 +29,17 @@ internal class Program
 
         builder.Services.AddDbContext<DatabaseContext>();
 
+        // Mailjet
+        builder.Services.AddHttpClient<IMailjetClient, MailjetClient>(client =>
+        {
+            //set BaseAddress, MediaType, UserAgent
+            client.SetDefaultSettings();
+            client.BaseAddress = new Uri("https://api.mailjet.com");
+            client.UseBasicAuthentication("f302f2e1a1d2ad3166fbed14d2fd4995", "b7b3a6ed0e6150fa58ee792034a385bf");
+        });
 
+
+        builder.Services.AddScoped<IMailService, IMailService>();
         builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(
             options =>
         {
