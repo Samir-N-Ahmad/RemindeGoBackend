@@ -8,6 +8,7 @@ using Backend.DataAccess.Entity;
 using Backend.DataAccess;
 using Backend.Common.Utilities;
 using Backend.Service.MailService;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Service;
 
@@ -43,7 +44,7 @@ public class AuthService(UserManager<AppUser> userManager, SignInManager<AppUser
         }
     }
 
-    public async Task<ErrorOr<bool>> OtpVerification(OtpVerificationRequest request)
+    public async Task<ErrorOr<bool>> OtpVerification([FromRoute] OtpVerificationRequest request)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
         if (user is null)
@@ -93,7 +94,10 @@ public class AuthService(UserManager<AppUser> userManager, SignInManager<AppUser
                 if (!newUser.EmailConfirmed)
                 {
                     string token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-                    await _mailService.SendMail(newUser!.Email!, "remindego@remindego.developerdemos.site", token, "OTP");
+                    var uriEncodedToken = Uri.EscapeDataString(token);
+                    await _mailService.SendMail(newUser!.Email!, "remindego@remindego.developerdemos.site",
+                   $"<h1> Welcome to remindeGo , to verify your account please go to http://localhost:5263/RemindeGo/User/Verify?Email={newUser!.Email}&Otp={uriEncodedToken}"
+                    , "OTP");
                 }
                 return true;
             }
@@ -107,5 +111,30 @@ public class AuthService(UserManager<AppUser> userManager, SignInManager<AppUser
             return Error.Unexpected();
         }
 
+    }
+
+    public async Task<ErrorOr<string>> ResendVerificationEmail(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user is null)
+        {
+            return Error.NotFound("The Sent Email is not used");
+        }
+        try
+        {
+            ///TODO:
+            // if(await _userManager.IsEmailConfirmedAsync(user)){
+            //     return Error.
+            // }
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            await _mailService.SendMail(user!.Email!, "remindego@remindego.developerdemos.site", token, "OTP");
+
+
+            return token;
+        }
+        catch
+        {
+            return Error.Unexpected("Error while Generation confirmation");
+        }
     }
 }
