@@ -43,6 +43,29 @@ public class AuthService(UserManager<AppUser> userManager, SignInManager<AppUser
         }
     }
 
+    public async Task<ErrorOr<bool>> OtpVerification(OtpVerificationRequest request)
+    {
+        var user = await _userManager.FindByEmailAsync(request.Email);
+        if (user is null)
+        {
+            return Error.NotFound("The Sent Email is not used");
+        }
+        try
+        {
+
+            var result = await _userManager.ConfirmEmailAsync(user, request.Otp);
+            if (result.Succeeded)
+            {
+                return true;
+            }
+            return Error.Failure(result.Errors.Aggregate((acc, err) => new IdentityError() { Description = $"${acc.Description}\n${err.Description}" }).Description);
+        }
+        catch
+        {
+            return Error.Unexpected("Error while verfying you account, please try again later");
+        }
+    }
+
     public async Task<ErrorOr<bool>> Register(RegisterUserRequest request)
     {
         try

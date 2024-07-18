@@ -25,7 +25,7 @@ public class MailService(IMailjetClient mailjetClient) : IMailService
            .Property(Send.FromEmail, sender)
            .Property(Send.FromName, "RemindeGo")
            .Property(Send.Subject, subject)
-           .Property(Send.TextPart, "<h3>Dear passenger, welcome to RemindeGo, May the delivery force be with you!")
+           .Property(Send.TextPart, content)
            .Property(Send.Recipients, new JArray {
                 new JObject {
                  {"Email", reciever}

@@ -24,4 +24,17 @@ public class AuthController(IAuthService authService) : ControllerBase
         var result = await _authService.Register(request);
         return result.HandleErrorOr();
     }
+
+    [HttpPost("Verify")]
+    [AllowAnonymous]
+    public async Task<IResult> VErify([FromBody] RegisterUserRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+
+            ModelState.HandleValidationError();
+        }
+        var result = await _authService.Register(request);
+        return result.HandleErrorOr();
+    }
 }
