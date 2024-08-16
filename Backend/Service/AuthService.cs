@@ -87,6 +87,7 @@ public class AuthService(UserManager<AppUser> userManager, SignInManager<AppUser
             };
             var result = await _userManager.CreateAsync(newUser, request.Password);
 
+            // Send verification email
             if (result.Succeeded)
             {
                 await _dbContext.SaveChangesAsync();
@@ -95,6 +96,7 @@ public class AuthService(UserManager<AppUser> userManager, SignInManager<AppUser
                 {
                     string token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
                     var uriEncodedToken = Uri.EscapeDataString(token);
+                    // _siginManager.pas
                     await _mailService.SendMail(newUser!.Email!, "remindego@remindego.developerdemos.site",
                    $"<h1> Welcome to remindeGo , to verify your account please go to http://localhost:5263/RemindeGo/User/Verify?Email={newUser!.Email}&Otp={uriEncodedToken}"
                     , "OTP");

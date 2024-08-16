@@ -10,6 +10,12 @@ namespace Backend.DataAccess;
 public static class DatabaseSerializer
 {
 
+    /// <summary>
+    /// Seeds the database with initial data, including an admin user.
+    /// </summary>
+    /// <param name="serviceProvider">The service provider to use for database operations.</param>
+    /// <param name="IsDevelopment">A flag indicating whether the database should be deleted before seeding.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public static async Task SeedAsync(IServiceProvider serviceProvider, bool IsDevelopment)
     {
 

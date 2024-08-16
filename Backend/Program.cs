@@ -30,14 +30,18 @@ internal class Program
 
         builder.Services.AddDbContext<DatabaseContext>();
 
+        builder.Services.Configure<JWtSettings>(builder.Configuration.GetSection(JWtSettings.SectionTitle));
+
         // Mailjet
+        var mailJetConfigSection = builder.Configuration.GetSection(MailJetConfigs.SectionTitle);
         builder.Services.AddHttpClient<IMailjetClient, MailjetClient>(client =>
         {
             //set BaseAddress, MediaType, UserAgent
             client.SetDefaultSettings();
             client.BaseAddress = new Uri("https://api.mailjet.com");
-            client.UseBasicAuthentication("f302f2e1a1d2ad3166fbed14d2fd4995", "b7b3a6ed0e6150fa58ee792034a385bf");
+            client.UseBasicAuthentication(mailJetConfigSection.Get<MailJetConfigs>()?.ApiKey, mailJetConfigSection.Get<MailJetConfigs>()?.ApiSecret);
         });
+        builder.Services.Configure<MailJetConfigs>(mailJetConfigSection);
 
 
         builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(
@@ -88,9 +92,9 @@ internal class Program
                 ValidateLifetime = true,
 
 
-                ValidIssuer = jwtSettings.ValidIssuer,
-                ValidAudiences = jwtSettings.ValidAudeinces,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SigningKeys))
+                ValidIssuer = jwtSettings?.ValidIssuer,
+                ValidAudiences = jwtSettings?.ValidAudiences,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings?.SigningKeys))
 
             };
 

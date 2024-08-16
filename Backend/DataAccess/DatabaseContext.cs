@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Backend.Common.Configs;
 using Backend.DataAccess.Entity;
-using Backend.DataAccess.types;
 
 namespace Backend.DataAccess;
 

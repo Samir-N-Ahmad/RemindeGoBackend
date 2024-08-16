@@ -25,6 +25,18 @@ public class AuthController(IAuthService authService) : ControllerBase
         return result.HandleErrorOr();
     }
 
+    [HttpPost("Login")]
+    [AllowAnonymous]
+    public async Task<IResult> Login([FromBody] LoginRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            ModelState.HandleValidationError();
+        }
+        var result = await _authService.Login(request);
+        return result.HandleErrorOr();
+    }
+
     [HttpGet("Verify")]
     [AllowAnonymous]
     public async Task<IResult> Verify([FromQuery] OtpVerificationRequest request)

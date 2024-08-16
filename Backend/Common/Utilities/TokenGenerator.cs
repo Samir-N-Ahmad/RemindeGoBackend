@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Backend.DataAccess.Entity;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
+using Backend.Common.Configs;
 
 namespace Backend.Common.Utilities;
 
@@ -43,7 +44,7 @@ public class TokenGenerator : ITokenGenerator
         SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor()
         {
             Issuer = _jwtSettings.ValidIssuer,
-            Audience = _jwtSettings.ValidAudeinces.First(),
+            Audience = _jwtSettings.ValidAudiences.First(),
             Subject = new ClaimsIdentity(claims),
             SigningCredentials = credentials,
 
