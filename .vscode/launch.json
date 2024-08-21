@@ -8,13 +8,13 @@
             "name": "C#: Debug",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/Backend.csproj"
+            "projectPath": "${workspaceFolder}/RemindeGo.csproj"
         },
         {
             "name": "C#: Remindego Debug",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/Backend/Backend.csproj"
+            "projectPath": "${workspaceFolder}/RemindeGo/RemindeGo.csproj"
         },
         {
             "name": "C#: Remindego Test Debug",
