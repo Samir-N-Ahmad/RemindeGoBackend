@@ -38,10 +38,10 @@ jobs:
                 publish_dir: ./publish
                 run: |
 
-                    ssh -i ${{secrets.REMINDEGO_PRIVATE_KEY}} ${{vars.REMINDEGO_USERNAME}}@${{vars.REMINDEGO_IP}}
+                    ssh -i ${{secrets.REMINDEGO_PRIVATE_KEY}} ${{vars.REMINDEGO_USERNAME}}@${{vars.REMINDEGO_IP}} "
                     cd /home/remindego/public_html/RemindeGoBackend/
                     &&
                     git pull origin main &&
-                    sudo systemctl restart RemindeGo
+                    sudo systemctl restart RemindeGo"
 
     
