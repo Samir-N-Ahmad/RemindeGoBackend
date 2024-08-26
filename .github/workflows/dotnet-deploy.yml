@@ -37,10 +37,8 @@ jobs:
                 username: ${{ vars.REMINDEGO_USERNAME }}
                 publish_dir: ./publish
                 run: |
-                    echo  " key" $REMINDEGO_PRIVATE_KEY 
-                    echo  " ip" ${{vars.REMINDEGO_IP  }}
-                    echo  " username" ${ vars.REMINDEGO_USERNAME }
-                    ssh -i ${{REMINDEGO_PRIVATE_KEY}} ${{REMINDEGO_USERNAME}}@${{REMINDEGO_IP}}
+
+                    ssh -i ${{secrets.REMINDEGO_PRIVATE_KEY}} ${{vars.REMINDEGO_USERNAME}}@${{vars.REMINDEGO_IP}}
                     cd /home/remindego/public_html/RemindeGoBackend/
                     &&
                     git pull origin main &&
