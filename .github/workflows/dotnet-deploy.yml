@@ -37,6 +37,9 @@ jobs:
                 username: ${{ vars.REMINDEGO_USERNAME }}
                 publish_dir: ./publish
                 run: |
+                    echo  " key" ${{ secrets.REMINDEGO_PRIVATE_KEY }}
+                    echo  " ip" ${{vars.REMINDEGO_IP  }}
+                    echo  " username" ${{ vars.REMINDEGO_USERNAME }}
                     ssh -i $REMINDEGO_PRIVATE_KEY $REMINDEGO_USERNAME@$REMINDEGO_IP
                     cd /home/remindego/public_html/RemindeGoBackend/
                     &&
