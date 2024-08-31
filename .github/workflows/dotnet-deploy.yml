@@ -48,7 +48,7 @@ jobs:
                     git checkout main &&
                     echo 'deploying 3'
                     &&
-                    git pull git@github.com:Samir-N-Ahmad/RemindeGoBackend.git &&
+                    git pull https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Samir-N-Ahmad/RemindeGoBackend.git &&
                     echo 'deploying 4'
                     &&
                     sudo systemctl restart RemindeGo"
