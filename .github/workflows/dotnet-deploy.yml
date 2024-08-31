@@ -39,10 +39,18 @@ jobs:
                 run: |
 
                     ssh -i ${{secrets.REMINDEGO_PRIVATE_KEY}} ${{vars.REMINDEGO_USERNAME}}@${{vars.REMINDEGO_IP}} "
+                    echo 'deploying 1'
+                    &&
                     cd /home/remindego/public_html/RemindeGoBackend/
                     &&
+                    echo 'deploying 2'
+                    &&
                     git checkout main &&
+                    echo 'deploying 3'
+                    &&
                     git pull main &&
+                    echo 'deploying 4'
+                    &&
                     sudo systemctl restart RemindeGo"
 
     
