@@ -36,23 +36,9 @@ jobs:
                 server_ip: ${{ vars.REMINDEGO_IP }}
                 username: ${{ vars.REMINDEGO_USERNAME }}
                 publish_dir: ./publish
-                run: |
-
-                    ssh -i ${{secrets.REMINDEGO_PRIVATE_KEY}}  -o StrictHostKeyChecking=no ${{vars.REMINDEGO_USERNAME}}@${{vars.REMINDEGO_IP}}
+                run: ssh -i ${{secrets.REMINDEGO_PRIVATE_KEY}}  -o StrictHostKeyChecking=no ${{vars.REMINDEGO_USERNAME}}@${{vars.REMINDEGO_IP}}
 
                 
-                    # echo 'deploying 1'
-                    # &&
-                    # cd /home/remindego/public_html/RemindeGoBackend/
-                    # &&
-                    # echo 'deploying 2'
-                    # &&
-                    # git checkout main &&
-                    # echo 'deploying 3'
-                    # &&
-                    # git pull https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Samir-N-Ahmad/RemindeGoBackend.git &&
-                    # echo 'deploying 4'
-                    # &&
-                    # sudo systemctl restart RemindeGo"
+                    
 
     
