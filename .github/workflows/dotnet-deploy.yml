@@ -30,13 +30,7 @@ jobs:
             - name: Publish
               run: dotnet publish -c Release -o publish
             - name: Deploy
-              uses: peaceiris/actions-gh-pages@v3
-              with:
-                github_token: ${{ secrets.REMINDEGO_PRIVATE_KEY }}
-                server_ip: ${{ vars.REMINDEGO_IP }}
-                username: ${{ vars.REMINDEGO_USERNAME }}
-                publish_dir: ./publish
-                run: ssh -i ${{secrets.REMINDEGO_PRIVATE_KEY}}  -o StrictHostKeyChecking=no ${{vars.REMINDEGO_USERNAME}}@${{vars.REMINDEGO_IP}}
+              run: ssh -i ${{secrets.REMINDEGO_PRIVATE_KEY}}  -o StrictHostKeyChecking=no ${{vars.REMINDEGO_USERNAME}}@${{vars.REMINDEGO_IP}}
 
                 
                     
