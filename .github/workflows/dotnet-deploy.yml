@@ -30,7 +30,7 @@ jobs:
             - name: Publish
               run: dotnet publish -c Release -o publish
             - name: Deploy
-              run: ssh -i secrets.REMINDEGO_PRIVATE_KEY  -o StrictHostKeyChecking=no vars.REMINDEGO_USERNAME@vars.REMINDEGO_IP
+              run: ssh -i "${{screts.REMINDEGO_PRIVATE_KEY}}"  -o StrictHostKeyChecking=no "${{vars.REMINDEGO_USERNAME}}@v${{ars.REMINDEGO_IP}}"
 
                 
                     
